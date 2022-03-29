@@ -1,3 +1,4 @@
+import 'package:curso_flutter/constans/routes.dart';
 import 'package:curso_flutter/views/login_view.dart';
 import 'package:curso_flutter/views/register_view.dart';
 import 'package:curso_flutter/views/verify_email_view.dart';
@@ -27,9 +28,9 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => const HomePage(),
-        '/login/': (context) => const LoginView(),
-        '/register/': (context) => const RegisterView(),
-        '/notes/': (context) => const NotesView(),
+        loginRoute: (context) => const LoginView(),
+        registerRoute: (context) => const RegisterView(),
+        notesRoute: (context) => const NotesView(),
       }
     );
   }
@@ -97,7 +98,7 @@ class _NotesViewState extends State<NotesView> {
                   final shouldLogout = await showLogOutDialog(context);
                   if (shouldLogout){
                     await FirebaseAuth.instance.signOut();
-                    Navigator.of(context).pushNamedAndRemoveUntil('/login/', (route) => false);
+                    Navigator.of(context).pushNamedAndRemoveUntil(loginRoute, (route) => false);
                   }
                   break;
               }

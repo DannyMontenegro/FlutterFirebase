@@ -1,3 +1,4 @@
+import 'package:curso_flutter/constans/routes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -67,7 +68,7 @@ class _LoginViewState extends State<LoginView> {
                               email: email, 
                               password: password
                             );
-                            Navigator.of(context).pushNamedAndRemoveUntil('/notes/', (route) => false,);
+                            Navigator.of(context).pushNamedAndRemoveUntil(notesRoute, (route) => false,);
                           } on FirebaseAuthException catch(e){
                             if(e.code=='user-not-found'){
                             }else if(e.code=='wrong-password'){
@@ -82,7 +83,7 @@ class _LoginViewState extends State<LoginView> {
                         child: const Text("Not registered yet?"),
                         onPressed: (){
                           //Navigator.pushNamed(context, '/register/');
-                          Navigator.of(context).pushNamedAndRemoveUntil('/register/', (route) => false);
+                          Navigator.of(context).pushNamedAndRemoveUntil(registerRoute, (route) => false);
                           
                         },
                       )

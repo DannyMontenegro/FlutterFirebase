@@ -1,3 +1,4 @@
+import 'package:curso_flutter/constans/routes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -81,7 +82,7 @@ class _RegisterViewState extends State<RegisterView> {
                         child: const Text("Already register? Login!"),
                         onPressed: (){
                           //Navigator.pushNamed(context, '/register/');
-                          Navigator.of(context).pushNamedAndRemoveUntil('/login/', (route) => false);
+                          Navigator.of(context).pushNamedAndRemoveUntil(loginRoute, (route) => false);
                           
                         },
                       )
