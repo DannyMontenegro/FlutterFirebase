@@ -1,6 +1,7 @@
 import 'package:curso_flutter/services/auth/auth_user.dart';
 
 abstract class AuthProvider {
+  Future<void> initialize();
   AuthUser? get currentUser;
 
   Future<AuthUser> logIn({
@@ -15,5 +16,4 @@ abstract class AuthProvider {
 
   Future<void> logOut();
   Future<void> sendEmailVerification();
-
 }
