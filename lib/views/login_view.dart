@@ -60,10 +60,19 @@ class _LoginViewState extends State<LoginView> {
                     email: email,
                     password: password,
                   );
-                  Navigator.of(context).pushNamedAndRemoveUntil(
-                    notesRoute,
-                    (route) => false,
-                  );
+
+                  final user = FirebaseAuth.instance.currentUser;
+                  if (user?.emailVerified ?? false) {
+                    Navigator.of(context).pushNamedAndRemoveUntil(
+                      notesRoute,
+                      (route) => false,
+                    );
+                  } else {
+                    Navigator.of(context).pushNamedAndRemoveUntil(
+                      verifyEmailRoute,
+                      (route) => false,
+                    );
+                  }
                 } on FirebaseAuthException catch (e) {
                   if (e.code == 'user-not-found') {
                     await showErrorDialog(
@@ -84,12 +93,12 @@ class _LoginViewState extends State<LoginView> {
                       "Error ocurred",
                     );
                   }
-                } catch (e){
+                } catch (e) {
                   await showErrorDialog(
-                      context,
-                      e.toString(),
-                      "Something unexpected happened",
-                    );
+                    context,
+                    e.toString(),
+                    "Something unexpected happened",
+                  );
                 }
               },
               child: const Text("Login")),
@@ -108,5 +117,3 @@ class _LoginViewState extends State<LoginView> {
     );
   }
 }
-
-
